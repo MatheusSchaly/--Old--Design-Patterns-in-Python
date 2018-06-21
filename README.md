@@ -1,6 +1,6 @@
 # Design-Patterns-in-Python
 
-Here you will find a brief <b> explaination </b> of the 23 design patterns, as well as their <b> UML </b> representation and <b> Python code </b>.
+Here you will find a brief <b> explanation </b> of the 23 design patterns, as well as their <b> UML </b> representation and <b> Python code </b>.
 I'm only a student, so don't rely too much on the this repository. I also appreciate any suggestions.
 
 My main references were:

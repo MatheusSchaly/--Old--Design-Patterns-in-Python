@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
 """
 Created on Wed Jun 13 14:05:13 2018
+
+@author: Matheus Schaly
 """
 
 from abc import ABC, abstractmethod

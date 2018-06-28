@@ -53,17 +53,22 @@ class Drawing(Shape):
 
 tri1 = Triangle()
 tri2 = Triangle()
-cir  = Circle()
+cir1 = Circle()
+cir2 = Circle()
+tri3 = Triangle()
 
-drawing = Drawing()
-drawing.add(tri1)
-drawing.add(tri2)
-drawing.add(cir)
+drawing1 = Drawing()
+drawing1.add(cir1)
+drawing1.add(tri1)
 
-drawing.draw("Red")
+drawing2 = Drawing()
+drawing2.add(tri2)
+drawing2.add(tri3)
+drawing2.add(cir2)
+drawing2.add(drawing1)
 
-drawing.clear()
+drawing2.draw("Green")
 
-drawing.add(tri1)
-drawing.add(cir)
-drawing.draw("Green")
+drawing2.clear()
+
+drawing2.draw("Blue")

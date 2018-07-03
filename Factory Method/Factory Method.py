@@ -27,8 +27,8 @@ class MazeGame(ABC):
         print("Playing using \"{}\"".format(self.rooms[0]))
 
     @abstractmethod
-    def make_room(self):
-        raise NotImplementedError("You should implement this!")
+    def make_room(self): # Factory Method
+        pass
 
 
 # Concrete Creator 1

@@ -6,103 +6,99 @@ Created on Tue Jun 19 10:09:05 2018
 
 
 from abc import ABC, abstractmethod
-import copy
 
 
 # Flyweight Factory
 class Shape_Factory:
     
-    circle_map = {}
+    color_map = {}
     
-    def get_circle(cls, color):
+    @staticmethod
+    def get_color(color):
         
-        circle = cls.circle_map.get(color)
+        try:
+            _color_obj = Shape_Factory.color_map[color]
+        except KeyError:
+            _color_obj = Color(color)
+            Shape_Factory.color_map[color] = _color_obj
+            print("Creating color: " + color)
         
-        if (circle == None):
-            circle = Circle(color)
-            cls.circle_map[color] = circle
-            print("Creating circle of color: " + color)
-        
-        return copy.deepcopy(circle) # Should it be a copy?
-    
+        return _color_obj
+
     
 # Flyweight
 class Shape(ABC):
+    
+    def __init__(self, color):
+        self._color_obj = Shape_Factory.get_color(color)
+
+    @property
+    def color_obj(self):
+        return self._color_obj
 
     @abstractmethod
     def draw(self):
         pass
-    
-    
-# Concrete Flyweight
-class Circle(Shape):
+
+
+# Shared Flyweight
+class Color:
     
     _color = ''
-    _x = 0
-    _y = 0
-    _radius = 0
     
     def __init__(self, color):
         self._color = color
-    
+        
     @property
     def color(self):
         return self._color
+    
+    def __str__(self):
+        return self._color
+
+    
+# Unshared Concrete Flyweight
+class Circle(Shape):
+    
+    def __init__(self, color, x, y, radius):
+        super().__init__(color)
+        self._x = x
+        self._y = y
+        self._radius = radius
     
     @property
     def x(self):
         return self._x
 
-    @x.setter
-    def x(self, x):
-        self._x = x
-
     @property
     def y(self):
         return self._y
-
-    @y.setter
-    def y(self, y):
-        self._y = y
         
     @property
     def radius(self):
         return self._radius
-    
-    @radius.setter
-    def radius(self, radius):
-        self._radius = radius
         
     def draw(self):
-        print("Circle: \ncolor:", self.color, "\nx:", self.x, "\ny:", self.y, "\nradius:", self.radius)
+        print("Circle: \ncolor:", self._color_obj, "\nx:", self.x, "\ny:", self.y, "\nradius:", self.radius)
+        
 
 my_circles = []
 
-circle = Shape_Factory.get_circle(Shape_Factory, "black")
+circle = Circle("black", x=10, y=20, radius=30)
 circle.draw()
 my_circles.append(circle)
 print()
 
-circle = Shape_Factory.get_circle(Shape_Factory, "black")
-circle.x = 10
-circle.y = 20
-circle.radius = 5
+circle = Circle("black", x=40, y=50, radius=60)
 circle.draw()
 my_circles.append(circle)
 print()
 
-circle = Shape_Factory.get_circle(Shape_Factory, "black")
+circle = Circle("red", x=70, y=80, radius=90)
 circle.draw()
 my_circles.append(circle)
-print()
 
-circle = Shape_Factory.get_circle(Shape_Factory, "red")
-circle.draw()
-my_circles.append(circle)
-print()
-
-print("My circles:")
+print("\n\nMy circles:\n")
 for circle in my_circles:
     circle.draw()
     print()
-

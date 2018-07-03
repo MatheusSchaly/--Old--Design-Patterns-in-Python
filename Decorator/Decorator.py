@@ -5,15 +5,22 @@ Created on Fri Jun 15 10:52:08 2018
 """
 
 
-from abc import ABC
+from abc import ABC, abstractmethod
 
 
 # Component
 class Pizza(ABC):
-    
-    description = ""
-    cost = 0
 
+    @property
+    @abstractmethod
+    def description(self):
+        pass
+    
+    @property
+    @abstractmethod
+    def cost(self):
+        pass
+    
     
 # Concrete Component
 class Plain_Pizza(Pizza):
@@ -30,23 +37,16 @@ class Plain_Pizza(Pizza):
     
 # Decorator
 class Topping_Decorator(Pizza):
-    
-    temp_pizza = Pizza()
+
+    temp_pizza = Plain_Pizza()
     
     def __init__(self, new_pizza):
         self.temp_pizza = new_pizza
-    
-    @property
-    def description(self):
-        return self.temp_pizza.description()
-    
-    @property
-    def get_cost(self):
-        return self.temp_pizza.cost
 
     
 # Concrete Decorator 1
 class Mozzarella(Topping_Decorator):
+    
     def __init__(self, new_pizza):
         super().__init__(new_pizza)
         print("Adding Dough")
@@ -54,28 +54,29 @@ class Mozzarella(Topping_Decorator):
     
     @property
     def description(self):
-        return super().temp_pizza.description + ", mozzarella"
+        return self.temp_pizza.description + ", mozzarella"
     
     @property
     def cost(self):
-        print("Cost of Moz: " + "0.50")
-        return super().temp_pizza.cost + 0.50
+        print("Cost of Moz: 0.50")
+        return self.temp_pizza.cost + 0.50
 
     
 # Concrete Decorator 2
 class Tomato_Sauce(Topping_Decorator):
+    
     def __init__(self, new_pizza):
         super().__init__(new_pizza)
         print("Adding Sauce")
     
     @property
     def description(self):
-        return super().temp_pizza.description + ", tomato sauce"
+        return self.temp_pizza.description + ", tomato sauce"
     
     @property
     def cost(self):
-        print("Cost of Sauce: " + "0.35")
-        return super().temp_pizza.cost + 0.35
+        print("Cost of Sauce: 0.35")
+        return self.temp_pizza.cost + 0.35
 
 
 basic_pizza = Tomato_Sauce(Mozzarella(Plain_Pizza()))

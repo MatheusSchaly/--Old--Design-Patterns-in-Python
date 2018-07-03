@@ -55,8 +55,12 @@ class Linux_Window(Window):
 # Abstract Factory
 class GUI_Factory(ABC):
     
-    @abstractmethod
-    def create_button(self):
+    @abstractmethod 
+    def create_button(self): # Factory Method
+        pass
+    
+    @abstractmethod 
+    def create_window(self): # Factory Method
         pass
     
 

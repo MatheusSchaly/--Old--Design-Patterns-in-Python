@@ -1,6 +1,8 @@
 """
 Created on Wed Jun 20 09:21:33 2018
 
+@author: Matheus Schaly
+
 Summing up an iterator in python:
     
 When you call the for loop in an iterable container/aggregate/collection
@@ -8,9 +10,7 @@ it will call its method __iter__(), which will return an iterator.
 The created iterator will have a method called 
 __next__() which will be called to iterate over the iterator.
     
-    These are five "different" ways you can iterate over a iterable container in python:
-
-@author: Matheus Schaly
+These are eight "different" ways you can iterate over a iterable container in python:
 """
 
 my_list = [2, 4, 6]
